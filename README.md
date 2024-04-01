@@ -2,7 +2,9 @@
 
 ## Array
 [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+
 Easy
+
 This problem is about finding if any number shows up more than once in a list. We use a hashmap to keep track of each number. If we see a number that's already in the hashmap, it means there's a duplicate.
 
 The time complexity is O(n), which means we go through the list just once. The space complexity is also O(n) because we need space to store each unique number in the hashmap.
@@ -35,7 +37,9 @@ map.set(nums[i], true);
 ```
 
 [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+
 Easy
+
 To check if two strings are anagrams(meaning they are made of the same characters in a different order), we can use two hashmaps to record the occurrence count of each character in both strings. After that, we compare the two hashmaps to see if they are identical. 
 
 The time complexity of O(n) and the space complexity of O(n). Iterates through each character of both strings once and uses two hashmaps to store their character count.
@@ -81,7 +85,9 @@ if (countB[key] !== value) return false;
 ```
 
 [1. Two Sum](https://leetcode.com/problems/two-sum/)
+
 Easy
+
 We use a hashmap to store each number along with its index, where the number is the key and the index is the value. We iterate through the array to find the difference between the target and the current number. If this difference is already in the hashmap, it means we have found a pair that adds up to the target, and we return their indices.
 
 The time complexity is O(n) because we only need to go through the array once. The space complexity is also O(n) as we create a hashmap to store each number and its index.
