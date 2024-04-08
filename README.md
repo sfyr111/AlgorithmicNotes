@@ -173,7 +173,7 @@ obj[key] = (obj[key] || []).concat(strs[i]); // Group anagrams together
 
 Medium
 
-To identify the top k frequent elements, we first utilize a hashmap, with each element as a key and its frequency as the value. Next, we convert this information into an array, where each index represents a frequency, and we place the elements into the positions that match their frequencies. Finally, by iterating through the array from the highest frequencies to the lowest, we extract the top k frequent numbers.
+To identify the top k frequent elements, we first utilize a hashmap, with each element as a key and its frequency as the value. Next, we convert this information into an array, where each index represents a frequency, and we place the elements into positions that match their frequencies. Finally, by iterating through the array from the highest frequencies to the lowest, we extract the top k frequent numbers.
 
 ```javascript
 /**
@@ -299,5 +299,108 @@ for (let j = n - 2; j >= 0; j--) {
 // Multiply prefix and suffix products for the result
 for (let m = 0; m < n; m++) {
     result[m] = prefix[m] * suffix[m];
+}
+```
+
+[36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+
+Medium
+
+We use three hash tables to keep track of all the numbers in each row, column, and 3x3 square of the Sudoku board. The key part is figuring out the index for each square, which we do with `3 * Math.floor(i / 3) + Math.floor(j / 3)`. This way, we can easily check for any repeated numbers in these sections."
+
+```javascript
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+    const rows = Array.from({ length: 9 }, () => new Set());
+    const cols = Array.from({ length: 9 }, () => new Set());
+    const squares = Array.from({ length: 9 }, () => new Set());
+
+    for (let i = 0; i < board.length; i++) {
+        
+        for (let j = 0; j < board[i].length; j++) {
+            const num = board[i][j];
+
+            if (num === '.') 
+                continue;
+
+            const m = Math.floor(j / 3);
+            const n = Math.floor(i / 3);
+            const k = 3 * m + n;
+
+            if (rows[j].has(num) || cols[i].has(num) || squares[k].has(num))
+                return false;
+
+            rows[j].add(num);
+            cols[i].add(num);
+            squares[k].add(num);            
+        }
+    }
+    
+    return true;
+};
+```
+
+- **Key Concept**: Checking for duplicates in each row, column, and 3x3 square.
+- **Approach**: Use three hash tables to keep track of the numbers in rows, columns, and squares.
+- **Key Phrases**:
+    - "Three hash tables for rows, columns, and squares."
+    - "Calculating square index with a formula."
+    - "Identifying duplicates efficiently."
+- **Time Complexity**: O(n^2), because we iterate through each cell of the 9x9 Sudoku board.
+- **Space Complexity**: O(n), as we maintain three hash tables for the 9 rows, 9 columns, and 9 squares, and n refers to the total number of cells on the board.
+
+```javascript
+let squareIndex = 3 * Math.floor(i / 3) + Math.floor(j / 3);
+if (hashTables[squareIndex].has(num)) return false;
+```
+
+[128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
+
+Medium
+
+To find the longest consecutive sequence in an array, we use a Set to hold the numbers as it helps speed up the search process. We start counting for a sequence only if the current number is the beginning of a sequence, meaning there's no previous consecutive number. Searching for an element within an array inside a loop can lead to O(n^2) time complexity.
+
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestConsecutive = function(nums) {
+    let longest = 0;
+    let set = new Set(nums);
+    
+    for (let i = 0; i < nums.length; i++) {
+        if (!set.has(nums[i] - 1)) {
+            
+            let long = 0;
+            
+            while(set.has(nums[i] + long)) {
+                long += 1;
+            }
+
+            longest = Math.max(long, longest);
+        }
+    } 
+
+    return longest;
+};
+```
+
+- **Key Concept**: Identifying if the current element is the start of a consecutive sequence.
+- **Approach**: Use a `Set` to store the elements for quicker searches, **starting** the count for a sequence only when an element doesn't have a previous consecutive number.
+- **Key Phrases**:
+    - "Using a `Set` for efficient search."
+    - "Counting starts from the sequence beginning."
+    - "Avoiding O(n^2) complexity with array searches."
+
+```javascript
+let set = new Set(nums);
+for (let num of nums) {
+    if (!set.has(num - 1)) {
+        // Start counting from this number
+    }
 }
 ```
