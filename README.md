@@ -1,4 +1,19 @@
-[217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+
+# Table of Contents
+- [Array](#Array)
+  - [217. Contains Duplicate](#217-contains-duplicate)
+  - [242. Valid Anagram](#242-valid-anagram)
+  - [1. Two Sum](#1-two-sum)
+  - [49. Group Anagrams](#49-group-anagrams)
+  - [347. Top K Frequent Elements](#347-top-k-frequent-elements)
+  - [238. Product of Array Except Self](#238-product-of-array-except-self)
+  - [36. Valid Sudoku](#36-valid-sudoku)
+  - [128. Longest Consecutive Sequence](#128-longest-consecutive-sequence)
+
+
+## Array
+
+### [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 
 Easy
 
@@ -33,7 +48,7 @@ if (map.has(nums[i])) return true;
 map.set(nums[i], true);
 ```
 
-[242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+### [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
 
 Easy
 
@@ -81,7 +96,7 @@ countA[s[i]] = (countA[s[i]] || 0) + 1;
 if (countB[key] !== value) return false;
 ```
 
-[1. Two Sum](https://leetcode.com/problems/two-sum/)
+### [1. Two Sum](https://leetcode.com/problems/two-sum/)
 
 Easy
 
@@ -120,7 +135,7 @@ const diff = target - nums[i];
 if (obj[diff] !== undefined) return [i, obj[diff]];
 ```
 
-[49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+### [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 
 Medium
 
@@ -169,7 +184,7 @@ const key = count.join('#'); // Generate unique key for the hashmap
 obj[key] = (obj[key] || []).concat(strs[i]); // Group anagrams together
 ```
 
-[347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+### [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
 
 Medium
 
@@ -233,7 +248,7 @@ for (let c of counts[j]) {
 
 ```
 
-[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 
 Medium
   
@@ -302,7 +317,7 @@ for (let m = 0; m < n; m++) {
 }
 ```
 
-[36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+### [36. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
 
 Medium
 
@@ -357,7 +372,7 @@ let squareIndex = 3 * Math.floor(i / 3) + Math.floor(j / 3);
 if (hashTables[squareIndex].has(num)) return false;
 ```
 
-[128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
+### [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
 
 Medium
 
