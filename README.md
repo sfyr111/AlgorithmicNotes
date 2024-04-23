@@ -419,3 +419,274 @@ for (let num of nums) {
     }
 }
 ```
+
+## Two Pointers
+
+### [125.Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+
+Easy 
+
+To check if a given string is a palindrome (reads the same forward and backward), this solution uses a two-pointer technique. The two pointers start at the beginning
+
+The main idea is to validate characters as letters or numbers before comparing them. If both characters are valid and identical when converted to lowercase, the pointers continue to move inward. If at any point the characters do not match, the function returns false, indicating the string is not a palindrome.
+
+**Time Complexity**: O(n), where n is the length of the string, because each character is checked at most twice. 
+
+**Space Complexity**: O(1), since no additional space proportional to the input size is used.
+
+```javascript
+/**  
+ * @param {string} s  
+ * @return {boolean}  
+ */
+var isPalindrome = function (s) {  
+    let left = 0, right = s.length - 1;  
+  
+    while (left < right) {  
+        const leftChar = s[left].toLowerCase();  
+        const rightChar = s[right].toLowerCase();  
+  
+        if (!isValid(leftChar)) {  
+            left++;  
+            continue;  
+        }  
+  
+        if (!isValid(rightChar)) {  
+            right--;  
+            continue;  
+        }  
+  
+        if (leftChar === rightChar) {  
+            left++;  
+            right--;  
+        } else {  
+            return false;  
+        }  
+    }  
+  
+    return true;  
+};  
+  
+function isValid(char) {  
+  return ('0' <= char && char <= '9') || ('a' <= char && char <= 'z') || ('A' <= char && char <= 'Z');  
+}
+```
+
+- **Key Concept**: Verifying palindrome status by comparing characters from both ends of a string.
+- **Approach**: Use two pointers to compare characters, skipping letters and numbers  characters.
+- **Key Phrases**:
+    - "Two-pointer technique
+    - "Skipping letters and numbers characters."
+- **Example Code Snippet**:
+
+```javascript
+if (!isValid(leftChar)) left++;
+if (leftChar !== rightChar) return false;
+```
+
+### [167.Two Sum II Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+
+Medium
+
+Given a sorted array with no duplicates, we can use two pointers to search for a target sum. We start with one pointer at the beginning and another at the end of the array. If the sum is greater than the target, we decrease the right pointer to find a smaller sum. If the sum is smaller than the target, we increase the left pointer to find a bigger sum. This approach allows us to efficiently find the target sum in the array.
+
+**Time Complexity**: O(n), where n is the length of the array. Each element is involved in a sum calculation at most once. 
+
+**Space Complexity**: O(1), as the solution uses a constant amount of extra space.
+
+```javascript
+/**  
+ * @param {number[]} numbers  
+ * @param {number} target  
+ * @return {number[]}  
+ */  
+var twoSum = function(numbers, target) {  
+  let left = 0, right = numbers.length - 1;  
+  
+  while (left < right) {  
+    const sum = numbers[left] + numbers[right];  
+  
+    if (sum === target) {  
+      return [left + 1, right + 1];  
+    }  
+  
+    if (sum > target) {  
+      right--;  
+    } else {  
+      left++;  
+    }  
+  }  
+  
+  return [];  
+};
+```
+
+**Key Concept:**
++ Use two pointers to find a pair of numbers that sum to a target in a sorted array.
+
+**Approach:**
+- Adjust two pointers based on their sum's comparison to the target value.
+
+**Key Phrases:**
+- "Two-pointer search method"
+- "Increment left pointer for larger sums"
+- "Decrement right pointer for smaller sums"
+- "Efficient sum matching"
+- "Pointer adjustments based on target"
+- "Avoiding duplicates with sorted input"
+- "Optimal pointer movement"
+
+**Example Code Snippet**:
+```javascript
+const sum = numbers[left] + numbers[right];
+if (sum === target) return [left + 1, right + 1];
+if (sum > target) right--;
+else left++;
+```
+
+
+### [15.3Sum](https://leetcode.com/problems/3sum/)
+
+Medium
+
+To begin with, we have to sort the array in question. After that, we need to iterate through the sorted array, ensuring the current element every time. We also need to make two pointers to search for the remaining elements. It's important to note that to avoid duplicate results, we must skip the same position during iteration and move the pointer.
+
+**Time Complexity**: O(n^2), where n is the number of elements in the array. Sorting the array takes O(n log n), and the two-pointer search for each element takes linear time.
+
+**Space Complexity**: O(1) or O(n), depending on the sorting algorithm implementation. The space is used mainly for the output array which stores the triplets.
+
+```javascript
+/**  
+ * @param {number[]} nums  
+ * @return {number[][]}  
+ */  
+var threeSum = function(nums) {  
+  const numbers = nums.sort((a, b) => a - b);  
+  let res = [];  
+  
+  for (let i = 0; i < numbers.length; i++) {  
+    const current = numbers[i];  
+    if (current === numbers[i - 1])  
+      continue;  
+  
+    let left = i + 1, right = numbers.length - 1;  
+  
+    while (left < right) {  
+      const sum = current + numbers[left] + numbers[right];  
+  
+      if (sum > 0){  
+        right--;  
+      } else if (sum < 0) {  
+        left++;  
+      } else {  
+        res.push([current, numbers[left], numbers[right]]);  
+        left++;  
+  
+        while (left < right && numbers[left] === numbers[left - 1]) {  
+          left++;  
+        }  
+      }  
+    }  
+  }  
+  
+  return res;  
+};
+```
+
+**Key Concept**:
+- Traverse each element and use two pointers to find the remaining two for a zero sum.
+
+**Approach**:
+- Iterate over each element, using two pointers for subsequent values. Ensure skipping duplicate elements by comparing with the previous position during each iteration and pointer movement.
+
+**Key Phrases**:
+- "Sort array first for searching"
+- "Two-pointer search method"
+- "Ensure current element uniqueness"
+- "Skip duplicates during pointer adjustment"
+- "Iterate with duplicate checks"
+- "two-pointer traversal"
+- "Zero-sum triplet discovery"
+- "Combine sorting with two-pointer technique"
+
+```javascript
+if (sum === 0) {
+    res.push([numbers[i], numbers[left], numbers[right]]);
+    while (left < right && numbers[left] === numbers[left + 1]) left++;  // Avoid duplicates in results
+}
+```
+
+### [11.Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+
+Medium
+
+To find the largest area, we need to multiply the distance between two pointers by the minimum height. We then compare the heights of the two pointers and move the pointer with the shorter height. This is done to find the height position and keep track of the maximum area.
+
+**Time Complexity**: O(n), where n is the number of elements in the array. Each element is considered exactly once when calculating the area.
+
+**Space Complexity**: O(1), as only a constant amount of extra space is used besides the input list.
+
+```javascript
+/**  
+ * @param {number[]} height  
+ * @return {number}  
+ */  
+var maxArea = function(height) {  
+  let left = 0; right = height.length - 1;  
+  let maxArea = 0;  
+  
+  while (left < right) {  
+    const width = right - left;  
+    const minHeight = Math.min(height[left], height[right]);  
+  
+    const area = width * minHeight;  
+  
+    maxArea = Math.max(maxArea, area);  
+  
+    // move the shorter line  
+    if (height[right] < height[left]) {  
+      right--;  
+    } else {  
+      left++;  
+    }  
+  
+  }  
+  
+  return maxArea;  
+};
+```
+
+**Key Concept**:
+- Calculating the maximum water container area by two lines using their minimum height and the distance between them.
+
+**Approach**:
+- Utilize a two-pointer strategy starting at the start and end of the array and moving inwards, always moving the pointer at the shorter height to potentially increase the area.
+
+**Key Phrases**:
+- "Multiplying distance by minimum height"
+- "Comparing heights of two pointers"
+- "Moving the pointer with the shorter height"
+- "Tracking maximum area throughout"
+- "Dynamic pointer adjustment for optimal area"
+- "Height-driven pointer movement"
+- "Utilizing width and height for area calculation"
+- "Strategy for maximum water containment"
+- "Efficient area maximization by shifting pointers"
+
+**Example Code Snippet**:
+```javascript
+while (left < right) {
+    const width = right - left;  // Calculate the distance between the two pointers
+    const minHeight = Math.min(height[left], height[right]);  // Find the minimum height
+
+    const area = width * minHeight;  // Calculate the area
+    maxArea = Math.max(maxArea, area);  // Update the maximum area found so far
+
+    // Move the pointer with the shorter height to potentially increase the area
+    if (height[right] < height[left]) {
+        right--;
+    } else {
+        left++;
+    }
+}
+```
