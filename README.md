@@ -690,3 +690,87 @@ while (left < right) {
     }
 }
 ```
+
+### [42.Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+
+Hard
+
+Water can be trapped at each position in the array depending on the minimum of the maximum heights of the walls on the left and right sides. We must maintain and track the maximum heights on both sides throughout the process. Using two pointers representing these maximum heights, we adjust the pointer associated with the shorter side during each iteration, calculating the trapped water by subtracting the current height from the minimum of the two maximum heights and then adding the result to a cumulative total.
+
+Key Concept**:
+To find the maximum height between the left and right sides at a position, compare the heights and subtract the minimum from the current value. Repeat this process and sum up the results. The force method requires multiple iterations, while the two pointers method only needs one iteration.
+
+**Approach**:
+To find the maximum height between the left and right sides of the pointer, use leftMax and rightMax. During the iteration process, determine which of leftMax and rightMax is smaller and shift it. While shifting, keep track of the maximum value, and add up the result of the pointer position subtracted from the max value.
+
+| Max L    | 0   | 0   | 1   | 1   | 2   | 2   | 2   | 2   | 3   | 3   | 3   | 3   |
+| -------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Max R    | 3   | 3   | 3   | 3   | 3   | 3   | 3   | 3   | 2   | 2   | 1   | 0   |
+| Min(L,R) | 0   | 0   | 1   | 1   | 2   | 2   | 2   | 2   | 2   | 2   | 1   | 0   |
+| Input    | 0   | 1   | 0   | 2   | 1   | 0   | 1   | 3   | 2   | 1   | 2   | 1   |
+| Water    | 0   | 0   | 1   | 0   | 1   | 2   | 1   | 0   | 0   | 1   | 0   | 0   |
+
+
+```javascript
+/**  
+ * @param {number[]} height  
+ * @return {number}  
+ */  
+var trap = function(height) {  
+  let res = 0;  
+  let left = 0, right = height.length - 1;  
+  let leftMax = height[left], rightMax = height[right];  
+  
+  while (left < right) {  
+    if (leftMax < rightMax) {  
+      left++;  
+      leftMax = Math.max(leftMax, height[left]);  
+      res += leftMax - height[left];  
+    } else {  
+      right--;  
+      rightMax = Math.max(rightMax, height[right]);  
+      res += rightMax - height[right];  
+    }  
+  }  
+  
+  return res;  
+};
+```
+
+**Key Phrases**:
+- "Minimum of left and right maximum heights"
+- "Track max heights on both sides"
+- "Adjust pointers based on the shorter side"
+- "Calculate trapped water at each step"
+- "Subtract current height from minimum max height"
+- "Accumulate water trapped at each position"
+- "Single-pass with two-pointer technique"
+- "Dynamic update of leftMax and rightMax"
+- "Optimize tracking by moving the shorter wall"
+- "Efficient water trapping with minimal iterations"
+
+**Brute-Force Method:**
+
+- **Time Complexity**: O(n^2) — "Each element is compared with every other element."
+- **Space Complexity**: O(1) — "Only constant space is used, regardless of input size."
+
+**Two-Pointer Method:**
+
+- **Time Complexity**: O(n) — "Each element is visited once."
+- **Space Complexity**: O(1) — "Uses minimal space independent of the input size."
+
+**Example Code Snippet**:
+  
+```javascript
+while (left < right) {  
+  if (leftMax < rightMax) {  
+    left++;  
+    leftMax = Math.max(leftMax, height[left]);  // Update the maximum height on the left
+    res += leftMax - height[left];  // Calculate and add trapped water at current position
+  } else {  
+    right--;  
+    rightMax = Math.max(rightMax, height[right]);  // Update the maximum height on the right
+    res += rightMax - height[right];  // Calculate and add trapped water at current position
+  }  
+}
+```
