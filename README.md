@@ -9,6 +9,12 @@
   - [238. Product of Array Except Self](#238-product-of-array-except-self)
   - [36. Valid Sudoku](#36-valid-sudoku)
   - [128. Longest Consecutive Sequence](#128-longest-consecutive-sequence)
+- [Two Pointers](#two-pointers)
+  - [125.Valid Palindrome](#125valid-palindrome)
+  - [167.Two Sum II - Input Array Is Sorted](#167two-sum-ii---input-array-is-sorted)
+  - [15.3Sum](#153sum)
+  - [11.Container With Most Water](#11container-with-most-water)
+  - [42.Trapping Rain Water](#42trapping-rain-water)
 
 
 ## Array
